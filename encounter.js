@@ -1,4 +1,4 @@
-module.exports = class Encounter2 {
+module.exports = class Encounter {
     constructor(name, date, other) {
         this.name = name;
         this.date = date;
