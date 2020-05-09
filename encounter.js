@@ -23,4 +23,12 @@ module.exports = class Encounter {
             return `No Date: ${this.name}`;
         }
     };
+
+    equals(encounter){
+        if(!encounter || !encounter.name || !encounter.date){
+            return false;
+        } else {
+            return (encounter.name === this.name && encounter.date === this.date);
+        }
+    }
 }
