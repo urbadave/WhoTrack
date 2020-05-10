@@ -5,13 +5,26 @@ class Tracker {
         this.encounterList = [];
     }
 
-    addEncounter(encounter){
+    findEncounterIndex(encounter){
         if(encounter && encounter.name && encounter.date){
-            var exists = this.encounterList.find(function(item){return item.equals(encounter);});
-            if(!exists){
-                this.encounterList.push(encounter);
-            }
+            return this.encounterList.findIndex(function(item){return item.equals(encounter);});
         }
+        return -1;
+    }
+
+    addEncounter(encounter){
+        const index = this.findEncounterIndex(encounter);
+        if(index === -1){
+            this.encounterList.push(encounter);
+        }
+    }
+
+    removeEncounter(encounter){
+        const index = this.findEncounterIndex(encounter);
+        if(index !== -1){
+            return this.encounterList.splice(index, 1); //return the encounters that were removed.
+        }
+        return null;
     }
 
     sortEncounters(){
@@ -23,13 +36,24 @@ class Tracker {
     }
 }
 
+let enc1 = new Encounter('Erin Johnson', new Date(2020, 5, 8), 'Dog groomer');
+let enc2 = new Encounter('Mobile Small Engine Repair Guy', new Date(2020, 5, 8), 'Ken?');
+let enc3 = new Encounter('Brandon Mauhar', new Date(2020, 4, 27));
+let enc4 = new Encounter('Briane Evans', new Date(2020, 5, 3));
+let enc5 = new Encounter('Brandon Mauhar', new Date(2020, 5, 4));
+
 var trackerObj = new Tracker();
-trackerObj.addEncounter(new Encounter('Erin Johnson', new Date(2020, 5, 8), 'Dog groomer'));
-trackerObj.addEncounter(new Encounter('Mobile Small Engine Repair Guy', new Date(2020, 5, 8), 'Ken?'));
-trackerObj.addEncounter(new Encounter('Brandon Mauhar', new Date(2020, 4, 27)));
-trackerObj.addEncounter(new Encounter('Briane Evans', new Date(2020, 5, 3)));
-trackerObj.addEncounter(new Encounter('Brandon Mauhar', new Date(2020, 5, 4)));
+trackerObj.addEncounter(enc1);
+trackerObj.addEncounter(enc1);
+trackerObj.addEncounter(enc2);
+trackerObj.addEncounter(enc3);
+trackerObj.addEncounter(enc4);
+trackerObj.addEncounter(enc5);
 
 trackerObj.sortEncounters();
 
+trackerObj.printAll();
+
+console.log('remove one');
+trackerObj.removeEncounter(enc3);
 trackerObj.printAll();
