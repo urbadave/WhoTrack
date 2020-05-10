@@ -28,7 +28,26 @@ module.exports = class Encounter {
         if(!encounter || !encounter.name || !encounter.date){
             return false;
         } else {
-            return (encounter.name === this.name && encounter.date === this.date);
+            const nameMatch = (encounter.name === this.name);
+            const dateMatch = (encounter.date.valueOf() === this.date.valueOf());
+            return (nameMatch && dateMatch);
         }
+    }
+
+    static compare(one, other){
+        if(!one && !other) return 0;
+        if(!one) return -1;
+        if(!one) return 1;
+
+        if(!one.name && other.name) return -1;
+        if(one.name && !other.name) return 1;
+        if(one.name !== other.name) return one.name.localeCompare(other.name);
+        
+        //name exist and are the same
+        if(!one.date && other.date) return -1;
+        if(one.date && !other.date) return 1;
+        if(one.date.valueOf() < other.date.valueOf()) return -1;
+        if(one.date.valueOf() > other.date.valueOf()) return 1;
+        return 0;
     }
 }
