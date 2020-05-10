@@ -8,6 +8,7 @@ class Tracker {
     load(trackerJson){
         let self = this;
         const source = JSON.parse(trackerJson);
+        self.encounterList = [];
         if(source && source.encounterList){
             source.encounterList.forEach(function(item){
                 self.encounterList.push(new Encounter(item.name, new Date(item.date), item.other));
