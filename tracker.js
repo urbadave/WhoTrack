@@ -31,6 +31,21 @@ class Tracker {
         this.encounterList = this.encounterList.sort(Encounter.compare);
     }
 
+    allNames(){
+        if(this.encounterList){
+            const nameList = [];
+            this.encounterList.forEach(function(item){
+                if(item.name){
+                    if(!nameList.find(function(name){return name === item.name;})){
+                        nameList.push(item.name);}
+                }
+            });
+            nameList.sort();
+            return nameList;
+        }
+        return null;
+    }
+
     printAll(){
         this.encounterList.forEach(function(item){console.log(item.info);});
     }
@@ -53,6 +68,10 @@ trackerObj.addEncounter(enc5);
 trackerObj.sortEncounters();
 
 trackerObj.printAll();
+const names = trackerObj.allNames();
+if(names){
+    names.forEach(function(item){console.log(item)});
+}
 
 console.log('remove one');
 trackerObj.removeEncounter(enc3);
