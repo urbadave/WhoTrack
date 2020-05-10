@@ -5,6 +5,16 @@ class Tracker {
         this.encounterList = [];
     }
 
+    load(trackerJson){
+        let self = this;
+        const source = JSON.parse(trackerJson);
+        if(source && source.encounterList){
+            source.encounterList.forEach(function(item){
+                self.encounterList.push(new Encounter(item.name, new Date(item.date), item.other));
+            })
+        }
+    }
+
     findEncounterIndex(encounter){
         if(encounter && encounter.name && encounter.date){
             return this.encounterList.findIndex(function(item){return item.equals(encounter);});
@@ -58,12 +68,8 @@ let enc4 = new Encounter('Briane Evans', new Date(2020, 5, 3));
 let enc5 = new Encounter('Brandon Mauhar', new Date(2020, 5, 4));
 
 var trackerObj = new Tracker();
-trackerObj.addEncounter(enc1);
-trackerObj.addEncounter(enc1);
-trackerObj.addEncounter(enc2);
-trackerObj.addEncounter(enc3);
-trackerObj.addEncounter(enc4);
-trackerObj.addEncounter(enc5);
+var sourceJson = '{"encounterList":[{"name":"Brandon Mauhar","date":"2020-06-04T06:00:00.000Z"},{"name":"Briane Evans","date":"2020-06-03T06:00:00.000Z"},{"name":"Erin Johnson","date":"2020-06-08T06:00:00.000Z","other":"Dog groomer"},{"name":"Mobile Small Engine Repair Guy","date":"2020-06-08T06:00:00.000Z","other":"Ken?"}]}';
+trackerObj.load(sourceJson);
 
 trackerObj.sortEncounters();
 
@@ -76,3 +82,5 @@ if(names){
 console.log('remove one');
 trackerObj.removeEncounter(enc3);
 trackerObj.printAll();
+
+console.log(JSON.stringify(trackerObj));
