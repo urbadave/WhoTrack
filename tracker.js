@@ -25,7 +25,7 @@ class Tracker {
 
 var trackerObj = new Tracker();
 trackerObj.addEncounter(new Encounter('Erin Johnson', new Date(2020, 5, 8), 'Dog groomer'));
-trackerObj.addEncounter(new Encounter('Brandon Mauhar', new Date(2020, 4, 27)));
+trackerObj.addEncounter(new Encounter('Mobile Small Engine Repair Guy', new Date(2020, 5, 8), 'Ken?'));
 trackerObj.addEncounter(new Encounter('Brandon Mauhar', new Date(2020, 4, 27)));
 trackerObj.addEncounter(new Encounter('Briane Evans', new Date(2020, 5, 3)));
 trackerObj.addEncounter(new Encounter('Brandon Mauhar', new Date(2020, 5, 4)));
